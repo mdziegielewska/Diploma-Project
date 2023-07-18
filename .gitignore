@@ -1,0 +1,29 @@
+__pycache__
+.idea
+.ipynb_checkpoints
+/pobrane
+
+# annotations
+/videos
+/annotations
+/segmentation_masks
+/media/madziegielewska/Seagate Expansion Drive/MAGISTERKA/diploma-project/VoTT
+/media/madziegielewska/Seagate Expansion Drive/MAGISTERKA/diploma-project/VoTT-label-export
+
+# Semantic Segmentation
+/Semantic-Segmentation/frames_to_test_segmentation
+/Semantic-Segmentation/segmentation_test_results
+/Semantic-Segmentation/train_test_data
+/Semantic-Segmentation/video_results
+
+
+# Event Boundary Detection
+/Event-Boundary-Detection/graphs
+/Event-Boundary-Detection/graphs_diffweights
+/Event-Boundary-Detection/data_to_test.csv
+/Event-Boundary-Detection/test_data_diff.csv
+/TransNet
+/TransNetV2
+
+# Optical Flow
+/Optical Flow
