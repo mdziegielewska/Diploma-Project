@@ -15,6 +15,7 @@ __pycache__
 /Semantic-Segmentation/segmentation_test_results
 /Semantic-Segmentation/train_test_data
 /Semantic-Segmentation/video_results
+/Semantic-Segmentation/models
 
 
 # Event Boundary Detection
