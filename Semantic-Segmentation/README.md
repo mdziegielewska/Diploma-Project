@@ -76,6 +76,11 @@ Access to trained models: https://drive.google.com/drive/folders/1LW5IjKiBDKrdcz
     <td class="tg-0pky"></td>
     <td class="tg-0pky"></td>
   </tr>
+</tbody>
+</table>
+
+<table class="tg">
+<thead>
   <tr>
     <td class="tg-7btt"><b>PSPNet</b></td>
     <td class="tg-0pky"></td>
