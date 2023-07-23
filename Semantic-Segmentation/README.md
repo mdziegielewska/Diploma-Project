@@ -48,7 +48,7 @@ Access to trained models: https://drive.google.com/drive/folders/1LW5IjKiBDKrdcz
     <td class="tg-fymr">ResNet34</td>
     <td class="tg-7btt">0.96</td>
     <td class="tg-7btt">0.83</td>
-    <td class="tg-7btt">0.63</td>
+    <td class="tg-7btt">0.60</td>
     <td class="tg-fymr">0.85</td>
     <td class="tg-fymr">0.91</td>
   </tr>
