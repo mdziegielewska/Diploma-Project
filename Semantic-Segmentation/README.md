@@ -61,15 +61,15 @@ Access to trained models: https://drive.google.com/drive/folders/1LW5IjKiBDKrdcz
     <td class="tg-fymr">0.91</td>
   </tr>
   <tr>
-    <td class="tg-0pky">InceptionResNetV2</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
+    <td class="tg-0pky">SeResNet34</td>
+    <td class="tg-c3ow">0.95</td>
+    <td class="tg-c3ow">0.82</td>
+    <td class="tg-c3ow">0.63</td>
+    <td class="tg-0pky">0.85</td>
+    <td class="tg-0pky">0.90</td>
   </tr>
   <tr>
-    <td class="tg-0pky">EfficientNetB7</td>
+    <td class="tg-0pky">SeResNet50</td>
     <td class="tg-c3ow"></td>
     <td class="tg-c3ow"></td>
     <td class="tg-c3ow"></td>
@@ -138,15 +138,15 @@ Access to trained models: https://drive.google.com/drive/folders/1LW5IjKiBDKrdcz
     <td class="tg-fymr">0.90</td>
   </tr>
   <tr>
-    <td class="tg-0pky">InceptionResNetV2</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
+    <td class="tg-0pky">SeResNet34</td>
+    <td class="tg-c3ow">0.95</td>
+    <td class="tg-c3ow">0.79</td>
+    <td class="tg-c3ow">0.60</td>
+    <td class="tg-0pky">0.83</td>
+    <td class="tg-0pky">0.90</td>
   </tr>
   <tr>
-    <td class="tg-0pky">EfficientNetB7</td>
+    <td class="tg-0pky">SeResNet34</td>
     <td class="tg-c3ow"></td>
     <td class="tg-c3ow"></td>
     <td class="tg-c3ow"></td>
