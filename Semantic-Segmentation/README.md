@@ -107,11 +107,11 @@ Access to trained models: https://drive.google.com/drive/folders/1LW5IjKiBDKrdcz
   </tr>
   <tr>
     <td class="tg-0pky">VGG16</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
+    <td class="tg-c3ow">0.93</td>
+    <td class="tg-c3ow">0.78</td>
+    <td class="tg-c3ow">0.54</td>
+    <td class="tg-0pky">0.80</td>
+    <td class="tg-0pky">0.88</td>
   </tr>
   <tr>
     <td class="tg-0pky">VGG19</td>
@@ -123,11 +123,11 @@ Access to trained models: https://drive.google.com/drive/folders/1LW5IjKiBDKrdcz
   </tr>
   <tr>
     <td class="tg-0pky">ResNet34</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
+    <td class="tg-c3ow">0.93</td>
+    <td class="tg-c3ow">0.78</td>
+    <td class="tg-c3ow">0.53</td>
+    <td class="tg-0pky">0.80</td>
+    <td class="tg-0pky">0.88</td>
   </tr>
   <tr>
     <td class="tg-fymr">ResNet50</td>
