@@ -57,9 +57,24 @@ def test_segmentation(input_path, output_path, model, backbone, statistics=True)
     count = 0
 
     for i,m in zip(frames, preds):
+        needle_mask = m.astype(np.uint8)
+        needle_mask[needle_mask != 1] = 0
+        needle_mask[needle_mask == 1] = 255
+        needle_mask = np.stack((needle_mask,)*3, axis=-1)
+
+        oocyte_mask = m.astype(np.uint8)
+        oocyte_mask[oocyte_mask != 2] = 0
+        oocyte_mask[oocyte_mask == 2] = 255
+        oocyte_mask = np.stack((oocyte_mask,)*3, axis=-1)
+
         spermatozoid_mask = m.astype(np.uint8)
         spermatozoid_mask[spermatozoid_mask != 3] = 0
-        dst = cv2.bitwise_not(i,i, spermatozoid_mask)
+        spermatozoid_mask[spermatozoid_mask == 3] = 255
+        spermatozoid_mask = np.stack((spermatozoid_mask,)*3, axis=-1)
+
+        dst = cv2.addWeighted(i, 0.5, oocyte_mask, 0.5, 0)
+        dst = cv2.addWeighted(dst, 0.5, needle_mask, 0.5, 0)
+        dst = cv2.addWeighted(dst, 0.5, spermatozoid_mask, 0.5, 0)
 
         cv2.imwrite(f"{output_path}/frame_{count}.png", dst)
         count += 1
@@ -73,6 +88,6 @@ if __name__ == "__main__":
     input_path = f"{directory}/frames_to_test_segmentation"
     output_path = f"{directory}/segmentation_test_results"
 
-    model = f"{directory}/models/psp_softmax_1500_resnet50.hdf5"
+    model = f"{directory}/models/unet_softmax_1500_resnet50.hdf5"
 
     test_segmentation(input_path, output_path, model, "resnet50")
