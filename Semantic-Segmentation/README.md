@@ -23,11 +23,11 @@ Access to trained models: https://drive.google.com/drive/folders/1LW5IjKiBDKrdcz
   </tr>
   <tr>
     <td class="tg-c6of">VGG16</td>
-    <td class="tg-3xi5"></td>
-    <td class="tg-3xi5"></td>
-    <td class="tg-3xi5"></td>
-    <td class="tg-c6of"></td>
-    <td class="tg-c6of"></td>
+    <td class="tg-3xi5">0.95</td>
+    <td class="tg-3xi5">0.78</td>
+    <td class="tg-3xi5">0.56</td>
+    <td class="tg-c6of">0.82</td>
+    <td class="tg-c6of">0.89</td>
   </tr>
   <tr>
     <td class="tg-c6of">VGG19</td>
@@ -72,13 +72,11 @@ Access to trained models: https://drive.google.com/drive/folders/1LW5IjKiBDKrdcz
 </tbody>
 </table>
 
-
 <table class="tg">
 <thead>
   <tr>
-  <tr>
-    <td class="tg-hle0">PSPNet</td>
-    <td class="tg-c6of" colspan="5"></td>
+    <th class="tg-hle0">PSPNet</th>
+    <th class="tg-c6of" colspan="5"></th>
   </tr>
   <tr>
     <td class="tg-c6of" rowspan="2"></td>
@@ -135,11 +133,11 @@ Access to trained models: https://drive.google.com/drive/folders/1LW5IjKiBDKrdcz
   </tr>
   <tr>
     <td class="tg-c6of"><span style="font-weight:400;font-style:normal">SeResNet50</span></td>
-    <td class="tg-3xi5"></td>
-    <td class="tg-3xi5"></td>
-    <td class="tg-3xi5"></td>
-    <td class="tg-c6of"></td>
-    <td class="tg-c6of"></td>
+    <td class="tg-3xi5">0.95</td>
+    <td class="tg-3xi5">0.78</td>
+    <td class="tg-3xi5">0.56</td>
+    <td class="tg-c6of">0.83</td>
+    <td class="tg-c6of">0.89</td>
   </tr>
 </tbody>
 </table>
