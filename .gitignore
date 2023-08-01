@@ -2,10 +2,11 @@ __pycache__
 .idea
 .ipynb_checkpoints
 /pobrane
+/content
 
 # annotations
 /videos
-/frames
+/frame
 /annotations
 /segmentation_masks
 /media/madziegielewska/Seagate Expansion Drive/MAGISTERKA/diploma-project/VoTT
@@ -27,6 +28,7 @@ __pycache__
 /Event-Boundary-Detection/graphs_diffweights
 /Event-Boundary-Detection/data_to_test.csv
 /Event-Boundary-Detection/test_data_diff.csv
+/Event-Boundary-Detection/test_data.csv
 /TransNet
 /TransNetV2
 
