@@ -42,6 +42,27 @@ def convert_video_to_frames(video_path, output_path):
     print(f"video converted to {count} frames")
 
 
+def convert_video_to_array(video_path):
+    print("converting video from ", video_path)
+
+    # read video
+    vidcap = cv2.VideoCapture(video_path)
+    ret,image = vidcap.read()
+    fps = vidcap.get(cv2.CAP_PROP_FPS)
+
+    count = 0
+    frames = []
+    while ret:
+        image = cv2.resize(image, (384, 384))
+        frames.append(image)
+        count += 1
+
+    print(f"video converted to {count} frames")
+    frames = np.array(frames)
+
+    return frames
+
+
 def convert_timestamp_to_frame(video_path, timestamp):
     base_dir = os.path.realpath(video_path)
 
@@ -200,3 +221,26 @@ def augment_data(images, masks, size_x, size_y):
         augmented_masks.append(y5)
 
     return augmented_images, augmented_masks
+
+
+def remove_background(image):
+  tmp = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+  _,alpha = cv2.threshold(tmp,0,255,cv2.THRESH_BINARY)
+  b, g, r = cv2.split(image)
+  rgba = [b,g,r, alpha]
+  dst = cv2.merge(rgba,4)
+
+  return image
+
+
+def count_frames_manual(video):
+	total = 0
+        
+	while True:
+		(grabbed, frame) = video.read()
+                
+		if not grabbed:
+			break
+		total += 1
+
+	return total
