@@ -16,23 +16,6 @@ import matplotlib.pyplot as plt
 # print(tf.config.list_physical_devices('GPU'))
 # os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
 
-def count_frames_manual(video):
-	# initialize the total number of frames read
-	total = 0
-	# loop over the frames of the video
-	while True:
-		# grab the current frame
-		(grabbed, frame) = video.read()
-	 
-		# check to see if we have reached the end of the
-		# video
-		if not grabbed:
-			break
-		# increment the total number of frames read
-		total += 1
-	# return the total number of frames in the video file
-	return total
-
 
 def test_segmentation(video_input_path, output_path, video_name, model_name, model_path, backbone, statistics=True):
     # load model and preprocessing
