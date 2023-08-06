@@ -234,13 +234,27 @@ def remove_background(image):
 
 
 def count_frames_manual(video):
-	total = 0
-        
-	while True:
-		(grabbed, frame) = video.read()
-                
-		if not grabbed:
-			break
-		total += 1
+    total = 0
 
-	return total
+    base_dir = os.path.realpath(video)
+
+    vidcap = cv2.VideoCapture(base_dir)
+    ret,image= vidcap.read()
+    fps = vidcap.get(cv2.CAP_PROP_FPS)
+        
+    while True:
+        ret,image = video.read()
+                
+        if not grabbed:
+            break
+        
+        total += 1
+
+    return total
+
+
+def get_total_frames(video_path):
+    cap = cv2.VideoCapture(video_path)
+    length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    
+    return length
