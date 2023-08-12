@@ -36,3 +36,16 @@ __pycache__
 
 # Optical Flow
 /Optical Flow
+
+/preprocessed_dataset
+/preprocessed_train
+/preprocessed_test
+/test_npy
+/logs
+mp4_test_files.txt
+mp4_train_files.txt
+mp4_files.txt
+preprocessed_train.txt
+preprocessed_test.txt
+
+preprocessed_dataset.txt
