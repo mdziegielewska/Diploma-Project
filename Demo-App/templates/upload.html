@@ -1,31 +1,130 @@
 <!doctype html>
-<title>Python Flask - Video Upload and Play Example</title>
-<h2>Select a video to upload and play</h2>
-<p>
+<html lang="ppl">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Aplikacja demonstrujaca</title>
+</head>
+
+<style>
+	body {
+		background-color: #fffff9;
+		color: black;
+		font-family: system-ui;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		font-size: 28px;
+		min-height: 100vh;
+	}
+	header {
+		background-color: #fffff9;
+		font-family: system-ui;
+		padding: 20px;
+		text-align: left;
+		margin: 50px;
+		font-size: 20px;
+		padding: 0;
+	}
+	main {
+		flex: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	section {
+		margin: 20px;
+		padding: 20px;
+		background-color: #fffff9;
+		border-radius: 5px;
+		text-align: center;
+	}
+	footer {
+		background-color: #fffff9;
+		padding: 10px;
+		font-size: 20px;
+		text-align: right;
+		margin-right: 50px;
+		padding: 0;
+	}
+	button {
+		background-color: #afde95;
+		font-family: system-ui;
+		color: black;
+		border: none;
+		padding: 10px 20px;
+		border-radius: 5px;
+		cursor: pointer;
+		font-size: 18px;
+	}
+	select, input[type="file"] {
+		padding: 10px;
+		margin: 5px 0;
+		border-radius: 5px;
+		width: 15%;
+		background-color: white;
+		font-family: system-ui;
+		color: black;
+		font-size: 18px;
+	}
+</style>
+
+<body>
+<header>
+	<span style="font-weight: bold;">Projekt dyplomowy:</span> Analiza możliwości pomiaru ruchu na nagraniach wideo procedury ICSI przy użyciu metod uczenia maszynowego.
+</header>
+
+<section>
+<h3 style="font-size: 20px;">Prezentacja wyników</h3>
+<br>
+<br>
+<p style="font-size: 18px;">
 	{% with messages = get_flashed_messages() %}
 	  {% if messages %}
-		<ul>
 		{% for message in messages %}
-		  <li>{{ message }}</li>
+		{{ message }}
 		{% endfor %}
-		</ul>
 	  {% endif %}
 	{% endwith %}
 </p>
-{% if filename %}
-	<div style="margin: 10px auto;">
-		<video autoplay="autoplay" controls="controls" preload="preload">
-			<source src="{{ url_for('display_video', filename=filename) }}" type="video/mp4"></source>
-		</video>
-	</div>
-{% endif %}
-<form method="post" action="/" enctype="multipart/form-data">
-    <dl>
-		<p>
-			<input type="file" name="file" autocomplete="off" required>
-		</p>
-    </dl>
+
+<script>
+	function changeText() {
+		var button = document.getElementById("file-selected");
+		if (button.innerHTML === "Brak wybranego pliku") {
+			button.innerHTML = "Plik załadowano pomyślnie";
+		} else {
+			button.innerHTML = "Brak wybranego pliku";
+		}
+	}
+</script>
+
+<form method="post" action="/" onsubmit="upload_video()" enctype="multipart/form-data">
+    <dl style="font-size: 18px;">
+		<input type="file" name="file" autocomplete="off" accept=".mp4" id="file-input" style="display: none;" required>
+		<label for="file-input" onclick="changeText()" style="font-size: 18px; background-color: #afde95; color: black; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Wybierz plik</label>
+		<span id="file-selected" style="margin-left: 10px;">Brak wybranego pliku</span>
+	</dl>
+	<p>
+		<select id="dropdown" name="dropdown">
+			<option value="none">Wybierz rozwiązanie</option>
+			<option value="move">Pomiar ruchu</option>
+			<option value="event">Pomiar zdarzeń</option>
+		</select>
+	</p>
     <p>
-		<input type="submit" value="Upload">
+		<button type="submit" value="Upload">Wgraj film</button>
 	</p>
 </form>
+</section>
+
+
+<footer>
+	<br>
+	<br>
+	<p><b>Autor:</b> Marta Dzięgielewska</p>
+</footer>
+</body>
+</html>

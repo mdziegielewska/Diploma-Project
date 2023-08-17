@@ -1,4 +1,6 @@
 import os
+
+from werkzeug import run_simple
 from app import app
 import urllib.request
 from flask import Flask, flash, request, redirect, url_for, render_template
@@ -20,14 +22,14 @@ def upload_video():
 	else:
 		filename = secure_filename(file.filename)
 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-		#print('upload_video filename: ' + filename)
-		flash('Video successfully uploaded and displayed below')
-		return render_template('upload.html', filename=filename)
+		# print('upload_video filename: ' + filename)
+		return render_template('results.html', filename=filename)
 
 @app.route('/display/<filename>')
 def display_video(filename):
-	#print('display_video filename: ' + filename)
+	# print('display_video filename: ' + filename)
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
 if __name__ == "__main__":
     app.run()
+    run_simple("localhost", 5000, app)

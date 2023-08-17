@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ppl">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Aplikacja demonstrujaca</title>
+</head>
+
+<style>
+	body {
+		background-color: #fffff9;
+		color: black;
+		font-family: system-ui;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		font-size: 28px;
+		min-height: 100vh;
+	}
+	header {
+		background-color: #fffff9;
+		font-family: system-ui;
+		padding: 20px;
+		text-align: left;
+		margin: 50px;
+		font-size: 20px;
+		padding: 0;
+	}
+	main {
+		flex: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	section {
+		margin: 20px;
+		padding: 20px;
+		background-color: #fffff9;
+		border-radius: 5px;
+		text-align: center;
+	}
+	.container {
+    display: flex; 
+    text-align: left;
+    }
+    .box {
+        width: 50%; 
+        padding: 20px;
+        margin-right: 20px;
+    }
+	button {
+		background-color: #afde95;
+		font-family: system-ui;
+		color: black;
+		border: none;
+		padding: 10px 20px;
+		border-radius: 5px;
+		cursor: pointer;
+		font-size: 18px;
+	}
+	select, input[type="file"] {
+		padding: 10px;
+		margin: 5px 0;
+		border-radius: 5px;
+		width: 15%;
+		background-color: white;
+		font-family: system-ui;
+		color: black;
+		font-size: 18px;
+	}
+</style>
+
+<body>
+<section>
+<p style="font-size: 18px;">
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		{% for message in messages %}
+		{{ message }}
+		{% endfor %}
+	  {% endif %}
+	{% endwith %}
+</p>
+
+{% if filename %}
+<div class="container">
+    <div class="box">
+        <h3>Rozwiązanie 1</h3>
+        <p style="font-size: 18px;">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+    </div>
+	<div style="margin: 10px auto;" class="box">
+		<video autoplay="autoplay" controls="controls" preload="preload">
+			<source src="{{ url_for('display_video', filename=filename) }}" type="video/mp4"></source>
+		</video>
+	</div>
+{% endif %}
+</div>
+</section>
+
+</body>
+</html>

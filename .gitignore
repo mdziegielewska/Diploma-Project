@@ -31,11 +31,13 @@ __pycache__
 /Event-Boundary-Detection/test_data.csv
 /Event-Boundary-Detection/transnet_results
 /Event-Boundary-Detection/test_data_transnet.csv
+/preprocessed_transitions
 /TransNet
 /TransNetV2
 
 # Optical Flow
 /Optical Flow
+/video-scene-detection
 
 /preprocessed_dataset
 /preprocessed_train
@@ -43,9 +45,15 @@ __pycache__
 /test_npy
 /logs
 mp4_test_files.txt
+preprocessed_transitions.txt
+preprocessed_validation.txt
 mp4_train_files.txt
 mp4_files.txt
+transnet_preprocess.ipynb
 preprocessed_train.txt
 preprocessed_test.txt
+train_test.ipynb
+transnet_preprocess.json
+/data
 
 preprocessed_dataset.txt
