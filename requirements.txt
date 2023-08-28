@@ -19,4 +19,5 @@ segmentation-models==1.0.1
 tensorflow==2.12.0
 torch==2.0.1
 tqdm==4.65.0
+Werkzeug==2.0.1
 vidstab==1.7.4

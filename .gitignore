@@ -31,7 +31,9 @@ __pycache__
 /Event-Boundary-Detection/test_data.csv
 /Event-Boundary-Detection/transnet_results
 /Event-Boundary-Detection/test_data_transnet.csv
+/Event-Boundary-Detection/test_data_transnet1.csv
 /preprocessed_transitions
+/Event-Boundary-Detection/transnet1_results
 /TransNet
 /TransNetV2
 
