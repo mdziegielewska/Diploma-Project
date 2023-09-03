@@ -99,8 +99,35 @@
     <div class="box">
         <h3>Rozwiązanie {{curr}}</h3>
         <p style="font-size: 18px;">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+        {% if curr == 2 %}
+			Celem było znalezienie punktu przebicia błony komórkowej przez embriologa podczas procedury docytoplazmatycznej injekcji plemnika.
+			Wybrano dwa rozwiązania, cechujące się najwyższą skutecznością. W celu porównania przedstawiono predykowaną klatkę wraz z odpowiadającym im czasie wystąpienia danego przejścia.<br>
+			<br>
+			<b>TransNetV2</b><br>
+			Skuteczność: 86.9%<br>
+			Predykowana klatka: {{ res[0][0] }}<br>
+			Odpowiadający jej czas filmu: {{ res[0][1] }}s<br>
+			<br>
+			<b>SceneDetect</b><br>
+			Skuteczność: 62.4%<br>
+			Predykowana klatka: {{ res[1][0] }}<br>
+			Odpowiadający jej czas filmu: {{ res[1][1] }}s<br>
+		{% endif %}
+
+		{% if curr == 1 %}
+			Celem był pomiar ruchu na nagraniu procedury docytoplazmatycznej injekcji plemnika. 
+			Dokonano segmentacji przy pomocy architektury UNet z rdzeniem ResNet50, na bazie której wyznaczono obszary komórki jajowej, igły i plemnika. <br>
+			<br>
+			<b>Średnia wystąpień danej klasy na klatce w pikselach</b><br>
+			Tło: <br>
+			Komórka jajowa: <br>
+			Igła: <br>
+			Plemnik: <br>
+			<br>
+
+			Kolejno ........
+		{% endif %}
+	</p>
     </div>
 	<div style="margin-right: 10px; padding-right: 20px; width: 50%;" class="box">
 		<button id="return" value="return" class="right-button">Powrót</button>

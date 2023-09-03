@@ -36,6 +36,8 @@ __pycache__
 /Event-Boundary-Detection/transnet1_results
 /TransNet
 /TransNetV2
+/Demo-App/static
+/Demo-App/TransNetV2
 
 # Optical Flow
 /Optical Flow
