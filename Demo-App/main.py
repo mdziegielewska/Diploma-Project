@@ -12,6 +12,7 @@ import event
 def upload_form():
 	return render_template('upload.html')
 
+
 @app.route('/results', methods=['GET','POST'])
 def upload_video():
 	if 'file' not in request.files:
@@ -41,6 +42,7 @@ def upload_video():
 
 		return render_template('results.html', filename=filename, curr=current_res, result=result_num, res=res)
 
+
 @app.route('/results/filename=<filename>/current_res=<current_res>')
 def get_new(filename, current_res):
 	if current_res == '1':
@@ -48,10 +50,12 @@ def get_new(filename, current_res):
 	elif current_res == '2':
 		return render_template('results.html', filename=filename, curr=1, result=current_res)
 
+
 @app.route('/display/<filename>')
 def display_video(filename):
 	# print('display_video filename: ' + filename)
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
+
 
 if __name__ == "__main__":
     app.run()
