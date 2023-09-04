@@ -30,7 +30,7 @@ def predict_transnetv2(video_path):
     predictions = np.stack([single_frame_predictions, all_frame_predictions], 1)
     np.savetxt(output_path_preds + ".predictions.txt", predictions, fmt="%.6f")
 
-    # get most meaningful scen
+    # get most meaningful scene
     frame_result = np.argmax(single_frame_predictions)
     # convert got frame to timestamp
     timestamp_result = utils.convert_frame_to_timestamp(file_path, frame_result)

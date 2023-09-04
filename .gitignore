@@ -9,8 +9,8 @@ __pycache__
 /frame
 /annotations
 /segmentation_masks
-/media/madziegielewska/Seagate Expansion Drive/MAGISTERKA/diploma-project/VoTT
-/media/madziegielewska/Seagate Expansion Drive/MAGISTERKA/diploma-project/VoTT-label-export
+/VoTT
+/VoTT-label-export
 
 # Preprocessing
 /preprocessed_dataset
@@ -27,7 +27,6 @@ transnet_preprocess.ipynb
 preprocessed_train.txt
 preprocessed_test.txt
 train_test.ipynb
-transnet_preprocess.json
 /data
 preprocessed_dataset.txt
 
@@ -37,22 +36,24 @@ preprocessed_dataset.txt
 /Semantic-Segmentation/train_test_data
 /Semantic-Segmentation/video_results
 /Semantic-Segmentation/models
+Semantic-Segmentation/content
+Semantic-Segmentation/frame
 /Semantic-Segmentation/test_results
 /Semantic-Segmentation/psp_semantic_segmentation_resnet34.ipynb
 /Semantic-Segmentation/opyf
 
 
 # Event Boundary Detection
-/Event-Boundary-Detection/graphs
-/Event-Boundary-Detection/graphs_diffweights
-/Event-Boundary-Detection/data_to_test.csv
-/Event-Boundary-Detection/test_data_diff.csv
-/Event-Boundary-Detection/test_data.csv
-/Event-Boundary-Detection/transnet_results
-/Event-Boundary-Detection/test_data_transnet.csv
-/Event-Boundary-Detection/test_data_transnet1.csv
+/Event-Boundary-Detection/SceneDetect/graphs
+/Event-Boundary-Detection/SceneDetect/graphs_diffweights
+/Event-Boundary-Detection/SceneDetect/data_to_test.csv
+/Event-Boundary-Detection/SceneDetect/test_data_diff.csv
+/Event-Boundary-Detection/SceneDetect/test_data.csv
+/Event-Boundary-Detection/TransNet/transnet_results
+/Event-Boundary-Detection/TransNet/test_data_transnet.csv
+/Event-Boundary-Detection/TransNet/test_data_transnet1.csv
 /preprocessed_transitions
-/Event-Boundary-Detection/transnet1_results
+/Event-Boundary-Detection/TransNet/transnet1_results
 /TransNet
 /TransNetV2
 
