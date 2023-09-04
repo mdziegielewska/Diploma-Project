@@ -31,14 +31,16 @@ def upload_video():
 		if selected_option == 'move':
 			current_res = 1
 			result_num = 2
-			res = None
+			res = [[121212, 678],[787, 678]]
 		elif selected_option == 'event':
 			current_res = 2
 			result_num = 1
 
 			transnet_results = event.predict_transnetv2(filename)
 			scenedetect_results = event.predict_scenedetect(filename)
-			res = [transnet_results, scenedetect_results]
+
+			file, file_extension =  os.path.splitext(f'static/graphs/{filename}')
+			res = [transnet_results, scenedetect_results, file]
 
 		return render_template('results.html', filename=filename, curr=current_res, result=result_num, res=res)
 
@@ -46,9 +48,15 @@ def upload_video():
 @app.route('/results/filename=<filename>/current_res=<current_res>')
 def get_new(filename, current_res):
 	if current_res == '1':
-		return render_template('results.html', filename=filename, curr=2, result=current_res)
+		transnet_results = event.predict_transnetv2(filename)
+		scenedetect_results = event.predict_scenedetect(filename)
+		res = [transnet_results, scenedetect_results]
+
+		return render_template('results.html', filename=filename, curr=2, result=current_res, res=res)
 	elif current_res == '2':
-		return render_template('results.html', filename=filename, curr=1, result=current_res)
+		res = [[121212, 678],[787, 678]]
+
+		return render_template('results.html', filename=filename, curr=1, result=current_res, res=res)
 
 
 @app.route('/display/<filename>')

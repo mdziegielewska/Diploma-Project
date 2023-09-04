@@ -100,18 +100,36 @@
         <h3>Rozwiązanie {{curr}}</h3>
         <p style="font-size: 18px;">
         {% if curr == 2 %}
-			Celem było znalezienie punktu przebicia błony komórkowej przez embriologa podczas procedury docytoplazmatycznej injekcji plemnika.
-			Wybrano dwa rozwiązania, cechujące się najwyższą skutecznością. W celu porównania przedstawiono predykowaną klatkę wraz z odpowiadającym im czasie wystąpienia danego przejścia.<br>
-			<br>
-			<b>TransNetV2</b><br>
-			Skuteczność: 86.9%<br>
-			Predykowana klatka: {{ res[0][0] }}<br>
-			Odpowiadający jej czas filmu: {{ res[0][1] }}s<br>
-			<br>
-			<b>SceneDetect</b><br>
-			Skuteczność: 62.4%<br>
-			Predykowana klatka: {{ res[1][0] }}<br>
-			Odpowiadający jej czas filmu: {{ res[1][1] }}s<br>
+				<div style="font-size: 18px;">
+					Celem było znalezienie punktu przebicia błony komórkowej przez embriologa podczas procedury docytoplazmatycznej injekcji plemnika.
+					Wybrano dwa rozwiązania, cechujące się najwyższą skutecznością. W celu porównania przedstawiono predykowaną klatkę wraz z odpowiadającym im czasie wystąpienia danego przejścia.<br>
+					<br>
+					<br>
+					<b>TransNetV2</b><br>
+					TransNetV2 to zaawansowany model sieci neuronowej do detekcji zmian scen w wideo. Reprezentuje zaawansowane podejście do tego zadania, wykorzystując techniki sieci neuronowych, co przyczynia się do precyzyjnej detekcji zmian scen. <br>
+					<br>
+					Skuteczność: 86.9%<br>
+					Predykowana klatka: <b>{{ res[0][0] }}</b><br>
+					Odpowiadający jej czas filmu: <b>{{ res[0][1] }}s</b><br>
+					<br>
+				</div>
+				<div style="display: flex; justify-content: center;">
+					<img src="{{res[2]}}_transnet.jpg" style="justify-content: center;" width=540 height=380 alt="scenedetect_graphs"><br>
+				</div>
+				<br>
+				<div style="font-size: 18px;">
+					<br>
+					<b>SceneDetect</b><br>
+					SceneDetect to narzędzie do automatycznego wykrywania zmian scen w plikach wideo, co pomaga w efektywnym przetwarzaniu i indeksowaniu materiałów wideo. Wykorzystuje różne algorytmy, takie jak analiza histogramu kolorów i detekcja ruchu, aby dokładnie określić, kiedy scena zmienia się w materiale wideo.<br>
+					<br>
+					Skuteczność: 62.4%<br>
+					Predykowana klatka: <b>{{ res[1][0] }}</b><br>
+					Odpowiadający jej czas filmu: <b>{{ res[1][1] }}s</b><br>
+					<br>
+				</div>
+				<div style="display: flex; justify-content: center;">
+					<img src="{{res[2]}}.jpg" style="justify-content: center;" width=540 height=380 alt="scenedetect_graphs"><br>
+				</div>
 		{% endif %}
 
 		{% if curr == 1 %}
@@ -127,7 +145,7 @@
 
 			Kolejno ........
 		{% endif %}
-	</p>
+		</p>
     </div>
 	<div style="margin-right: 10px; padding-right: 20px; width: 50%;" class="box">
 		<button id="return" value="return" class="right-button">Powrót</button>
@@ -139,7 +157,7 @@
 			});
 
 			document.getElementById('result').addEventListener('click', function() {
-				window.location.href = "{{ url_for('get_new', filename=filename, current_res=curr) }}";
+				window.location.href = "{{ url_for('get_new', filename=filename, current_res=curr, res=res) }}";
 			});
 		</script>
 
@@ -151,12 +169,10 @@
 {% endif %}
 </div>
 </section>
-
-
 <footer>
-	<br>
-	<br>
 	<p><b>Autor:</b> Marta Dzięgielewska</p>
+	<br>
+	<br>
 </footer>
 </body>
 </html>

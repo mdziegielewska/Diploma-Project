@@ -7,10 +7,12 @@ import pandas as pd
 from TransNetV2.inference import TransNetV2
 from datetime import datetime
 import utils
+import matplotlib.pyplot as plt
+
+dir = f"/media/madziegielewska/Seagate Expansion Drive/MAGISTERKA/diploma-project/"
 
 
 def predict_transnetv2(video_path):
-    dir = f"/media/madziegielewska/Seagate Expansion Drive/MAGISTERKA/diploma-project/"
     # read model
     model = TransNetV2()
 
@@ -30,12 +32,27 @@ def predict_transnetv2(video_path):
     predictions = np.stack([single_frame_predictions, all_frame_predictions], 1)
     np.savetxt(output_path_preds + ".predictions.txt", predictions, fmt="%.6f")
 
+    utils.convert_to_csv(output_path_preds + ".predictions.txt", output_path_preds + ".predictions.csv")
+    show_graph(filename, output_path_preds)
+    
     # get most meaningful scene
     frame_result = np.argmax(single_frame_predictions)
     # convert got frame to timestamp
     timestamp_result = utils.convert_frame_to_timestamp(file_path, frame_result)
     
     return frame_result, timestamp_result
+
+
+def show_graph(filename, output_path_preds):
+    graph = pd.read_csv(output_path_preds + ".predictions.csv")
+    data_to_plot = graph.iloc[:, 1]
+
+    fig, ax = plt.subplots()
+    data_to_plot.plot.line(title=f'{filename}', ax=ax)
+    ax.set_xlabel('Klatka')
+    ax.set_ylabel('Predykowana wartość')
+
+    plt.savefig(f'{dir}Demo-App/static/graphs/{filename}_transnet.jpg')
 
 
 def predict_scenedetect(video_path):
@@ -53,7 +70,7 @@ def predict_scenedetect(video_path):
         ContentDetector(threshold=11.5))
     
     # detect potential boundaries of scenes
-    scene_manager.detect_scenes(video, show_progress=False)
+    scene_manager.detect_scenes(video, show_progress=True)
 
     # save processed video statistics
     stats_manager.save_to_csv(f'{dir}Demo-App/static/graphs/scenedetect_metrics.csv')
@@ -61,8 +78,13 @@ def predict_scenedetect(video_path):
     graph = pd.read_csv(f'{dir}Demo-App/static/graphs/scenedetect_metrics.csv')
     content_val = graph[graph['content_val'] > 3]
 
-    fig = content_val.plot.line(x='Frame Number', y='content_val', title=f'{filename}').get_figure()
-    fig.savefig(f'{dir}Demo-App/static/graphs/{filename}.jpg')
+    fig, ax = plt.subplots()
+    content_val.plot.line(x='Frame Number', y='content_val', title=f'{filename}', ax=ax)
+    ax.set_xlabel('Klatka')
+    ax.set_ylabel('Predykowana wartość')
+    ax.get_legend().remove()
+
+    plt.savefig(f'{dir}Demo-App/static/graphs/{filename}.jpg')
 
     max_value = graph['content_val'].idxmax()
     change = graph[graph['Frame Number'] == max_value]

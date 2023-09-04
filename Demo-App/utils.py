@@ -6,6 +6,7 @@ import os
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+import csv
 from datetime import datetime
 import math
 from albumentations import CenterCrop, RandomRotate90, GridDistortion, HorizontalFlip, VerticalFlip
@@ -273,3 +274,19 @@ def get_total_frames(video_path):
     length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     
     return length
+
+
+def convert_to_csv(file_path, output_path):
+    # read txt file
+    with open(file_path, 'r') as txt_file:
+        # read lines
+        lines = txt_file.readlines()
+
+        # save as csv
+        with open(output_path, 'w', newline='') as csv_file:
+            csv_writer = csv.writer(csv_file)
+            
+            # save each line with coma split
+            for line in lines:
+                data = line.strip().split(' ')
+                csv_writer.writerow(data)
