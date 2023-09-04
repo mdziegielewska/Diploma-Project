@@ -4,13 +4,32 @@ __pycache__
 /pobrane
 /content
 
-# annotations
+# Annotations
 /videos
 /frame
 /annotations
 /segmentation_masks
 /media/madziegielewska/Seagate Expansion Drive/MAGISTERKA/diploma-project/VoTT
 /media/madziegielewska/Seagate Expansion Drive/MAGISTERKA/diploma-project/VoTT-label-export
+
+# Preprocessing
+/preprocessed_dataset
+/preprocessed_train
+/preprocessed_test
+/test_npy
+/logs
+mp4_test_files.txt
+preprocessed_transitions.txt
+preprocessed_validation.txt
+mp4_train_files.txt
+mp4_files.txt
+transnet_preprocess.ipynb
+preprocessed_train.txt
+preprocessed_test.txt
+train_test.ipynb
+transnet_preprocess.json
+/data
+preprocessed_dataset.txt
 
 # Semantic Segmentation
 /Semantic-Segmentation/frames_to_test_segmentation
@@ -36,29 +55,12 @@ __pycache__
 /Event-Boundary-Detection/transnet1_results
 /TransNet
 /TransNetV2
-/Demo-App/static
-/Demo-App/TransNetV2
 
 # Optical Flow
 /Optical Flow
 /video-scene-detection
 
-/preprocessed_dataset
-/preprocessed_train
-/preprocessed_test
-/test_npy
-/logs
-mp4_test_files.txt
-preprocessed_transitions.txt
-preprocessed_validation.txt
-mp4_train_files.txt
-mp4_files.txt
-transnet_preprocess.ipynb
-preprocessed_train.txt
-preprocessed_test.txt
-train_test.ipynb
-transnet_preprocess.json
-/data
-
-preprocessed_dataset.txt
+# App
+/Demo-App/static
+/Demo-App/TransNetV2
 Demo-App/static/uploads
