@@ -31,7 +31,9 @@ def upload_video():
 		if selected_option == 'move':
 			current_res = 1
 			result_num = 2
-			res = [[121212, 678],[787, 678]]
+
+			file, file_extension =  os.path.splitext(f'{filename}')
+			res = [[121212, 678],[787, 678], file]
 		elif selected_option == 'event':
 			current_res = 2
 			result_num = 1
@@ -39,22 +41,25 @@ def upload_video():
 			transnet_results = event.predict_transnetv2(filename)
 			scenedetect_results = event.predict_scenedetect(filename)
 
-			file, file_extension =  os.path.splitext(f'static/graphs/{filename}')
+			file, file_extension =  os.path.splitext(f'{filename}')
 			res = [transnet_results, scenedetect_results, file]
 
 		return render_template('results.html', filename=filename, curr=current_res, result=result_num, res=res)
 
 
-@app.route('/results/filename=<filename>/current_res=<current_res>')
-def get_new(filename, current_res):
+@app.route('/results/current_res=<current_res>/filename=<filename>', methods=['GET', 'POST'])
+def get_new(current_res, filename):
 	if current_res == '1':
 		transnet_results = event.predict_transnetv2(filename)
 		scenedetect_results = event.predict_scenedetect(filename)
-		res = [transnet_results, scenedetect_results]
+
+		file, file_extension =  os.path.splitext(f'{filename}')
+		res = [transnet_results, scenedetect_results, file]
 
 		return render_template('results.html', filename=filename, curr=2, result=current_res, res=res)
 	elif current_res == '2':
-		res = [[121212, 678],[787, 678]]
+		file, file_extension =  os.path.splitext(f'{filename}')
+		res = [[121212, 678],[787, 678], file]
 
 		return render_template('results.html', filename=filename, curr=1, result=current_res, res=res)
 
@@ -64,6 +69,15 @@ def display_video(filename):
 	# print('display_video filename: ' + filename)
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
+@app.route('/static/graphs/<filename>.mp4/mode=<mode>')
+def display_graph(filename, mode):
+	file, file_extension =  os.path.splitext(f'{filename}')
+
+	if mode == "transnet":
+		return redirect(url_for('static', filename=f'graphs/{file}_transnet.jpg'), code=301)
+	else:
+		return redirect(url_for('static', filename=f'graphs/{file}.jpg'), code=301)
+	
 
 if __name__ == "__main__":
     app.run()

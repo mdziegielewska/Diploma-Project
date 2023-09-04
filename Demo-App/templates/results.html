@@ -114,7 +114,7 @@
 					<br>
 				</div>
 				<div style="display: flex; justify-content: center;">
-					<img src="{{res[2]}}_transnet.jpg" style="justify-content: center;" width=540 height=380 alt="scenedetect_graphs"><br>
+					<img src="{{ url_for('display_graph', filename=filename, mode='transnet') }}" style="justify-content: center;" content-type="image/jpeg" width=540 height=380 alt="transnet_graphs"><br>
 				</div>
 				<br>
 				<div style="font-size: 18px;">
@@ -128,7 +128,7 @@
 					<br>
 				</div>
 				<div style="display: flex; justify-content: center;">
-					<img src="{{res[2]}}.jpg" style="justify-content: center;" width=540 height=380 alt="scenedetect_graphs"><br>
+					<img src="{{ url_for('display_graph', filename=filename, mode='scenedetect') }}" style="justify-content: center;" content-type="image/jpeg" width=540 height=380 alt="scenedetect_graphs"><br>
 				</div>
 		{% endif %}
 
@@ -157,7 +157,7 @@
 			});
 
 			document.getElementById('result').addEventListener('click', function() {
-				window.location.href = "{{ url_for('get_new', filename=filename, current_res=curr, res=res) }}";
+				window.location.href = "{{ url_for('get_new', current_res=curr, filename=filename) }}";
 			});
 		</script>
 
