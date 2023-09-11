@@ -106,7 +106,7 @@ def convert_frame_to_timestamp(video_path, frame):
 
 
 def convert_frames_to_video(video_name, fps):
-    dir = "/media/madziegielewska/Seagate Expansion Drive/MAGISTERKA/diploma-project/"
+    dir = "/media/madziegielewska/Seagate Expansion Drive/Diploma-Project/"
     frames_path = f"{dir}Demo-App/static/segmentation_results"
     print("converting frames from ", frames_path)
 

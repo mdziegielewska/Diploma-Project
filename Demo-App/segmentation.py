@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 # print(tf.config.list_physical_devices('GPU'))
 # os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
 
-directory = "/media/madziegielewska/Seagate Expansion Drive/MAGISTERKA/diploma-project"
+directory = "/media/madziegielewska/Seagate Expansion Drive/Diploma-Project"
 output_path = f"{directory}/Semantic-Segmentation/segmentation_test_results"
 
 model = "unet"

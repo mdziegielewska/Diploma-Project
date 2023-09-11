@@ -9,7 +9,7 @@ from datetime import datetime
 import utils
 import matplotlib.pyplot as plt
 
-dir = f"/media/madziegielewska/Seagate Expansion Drive/MAGISTERKA/diploma-project/"
+dir = f"/media/madziegielewska/Seagate Expansion Drive/Diploma-Project/"
 
 
 def predict_transnetv2(video_path):
@@ -56,7 +56,7 @@ def show_graph(filename, output_path_preds):
 
 
 def predict_scenedetect(video_path):
-    dir = f"/media/madziegielewska/Seagate Expansion Drive/MAGISTERKA/diploma-project/"
+    dir = f"/media/madziegielewska/Seagate Expansion Drive/MAGISTERKA/Diploma-Project/"
 
     # get file name and extensions
     file_path = f"{dir}Demo-App/static/uploads/{video_path}"
