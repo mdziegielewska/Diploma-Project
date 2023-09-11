@@ -64,4 +64,7 @@ Semantic-Segmentation/frame
 # App
 /Demo-App/static
 /Demo-App/TransNetV2
-Demo-App/static/uploads
+/Demo-App/models
+/Demo-App/static/
+/Demo-App/opyflow/
+/Demo-App/TransNetV2/

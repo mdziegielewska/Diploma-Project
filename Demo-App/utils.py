@@ -6,7 +6,6 @@ import os
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-import csv
 from datetime import datetime
 import math
 from albumentations import CenterCrop, RandomRotate90, GridDistortion, HorizontalFlip, VerticalFlip
@@ -90,16 +89,25 @@ def convert_frame_to_timestamp(video_path, frame):
     vidcap = cv2.VideoCapture(base_dir)
     fps = vidcap.get(cv2.CAP_PROP_FPS)
 
-    sec = round((frame-1)/fps, 2)
+    milisec = (frame-1)/fps
 
-    if sec > 60:
-        min = sec%60
-        return f"{min}m{sec}s"
+    dt_obj = datetime.strptime(timestamp,"%H:%M:%S.%f")
+    time = dt_obj.time()
 
-    return sec
+    # convert timestamp to seconds
+    min = time.minute
+    sec = time.second
+    msec = time.microsecond
+
+    milisec = min * 60 + sec + msec / 1000000
+    frame_number = round(milisec * fps + 1)
+
+    return frame_number
 
 
-def convert_frames_to_video(frames_path, video_name, fps):
+def convert_frames_to_video(video_name, fps):
+    dir = "/media/madziegielewska/Seagate Expansion Drive/MAGISTERKA/diploma-project/"
+    frames_path = f"{dir}Demo-App/static/segmentation_results"
     print("converting frames from ", frames_path)
 
     file_list = glob.glob(f'{frames_path}/*.png')  # get all the pngs in the current directory
@@ -109,7 +117,9 @@ def convert_frames_to_video(frames_path, video_name, fps):
             for m in file_list_sorted]
 
     concat_clip = concatenate_videoclips(clips, method="compose")
-    concat_clip.write_videofile(video_name, fps=fps)
+
+    file, file_extension =  os.path.splitext(f'{video_name}')
+    concat_clip.write_videofile(f'{dir}Demo-App/static/uploads/{file}_segmented.mp4', fps=fps)
 
 
 def read_files(path):
@@ -162,16 +172,25 @@ def get_average_pixels(mask_list, return_weights=False):
         oocyte += np.count_nonzero(y == 2)
         spermatozoid += np.count_nonzero(y == 3)
 
+    px = [round(background/len(mask_list)), 
+          round(oocyte/len(mask_list)),
+          round(needle/len(mask_list)),
+          round(spermatozoid/len(mask_list))
+          ]
+    
+    """
     # get average pixels on mask
     print("Needle: ", round(needle/len(mask_list)))
     print("Ooctye: ", round(oocyte/len(mask_list)))
     print("Spermatozoid: ", round(spermatozoid/len(mask_list)))
     print("Background: ", round(background/len(mask_list)))
     print()
+    """
 
     if return_weights==True:
         return get_weights(background, needle, oocyte, spermatozoid)
 
+    return px
 
 def get_weights(b, n, o, s):
     classes_count_mean = [0,0,0,0]
@@ -274,19 +293,3 @@ def get_total_frames(video_path):
     length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     
     return length
-
-
-def convert_to_csv(file_path, output_path):
-    # read txt file
-    with open(file_path, 'r') as txt_file:
-        # read lines
-        lines = txt_file.readlines()
-
-        # save as csv
-        with open(output_path, 'w', newline='') as csv_file:
-            csv_writer = csv.writer(csv_file)
-            
-            # save each line with coma split
-            for line in lines:
-                data = line.strip().split(' ')
-                csv_writer.writerow(data)

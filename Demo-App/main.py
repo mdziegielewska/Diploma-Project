@@ -6,6 +6,7 @@ import urllib.request
 from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 import event
+import segmentation
 
 
 @app.route('/')
@@ -33,7 +34,10 @@ def upload_video():
 			result_num = 2
 
 			file, file_extension =  os.path.splitext(f'{filename}')
-			res = [[121212, 678],[787, 678], file]
+			px = segmentation.test_segmentation(filename)
+
+			filename = f'{file}_segmented.mp4'
+			res = [px]
 		elif selected_option == 'event':
 			current_res = 2
 			result_num = 1
