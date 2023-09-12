@@ -56,18 +56,19 @@ def show_graph(filename, output_path_preds):
 
 
 def predict_scenedetect(video_path):
-    dir = f"/media/madziegielewska/Seagate Expansion Drive/MAGISTERKA/Diploma-Project/"
+    dir = f"/media/madziegielewska/Seagate Expansion Drive/Diploma-Project/"
 
     # get file name and extensions
     file_path = f"{dir}Demo-App/static/uploads/{video_path}"
     filename, file_extension = os.path.splitext(f'{video_path}')
 
-    video = open_video(file_path)
     stats_manager = StatsManager()
     scene_manager = SceneManager(stats_manager=stats_manager)
 
     scene_manager.add_detector(
         ContentDetector(threshold=11.5))
+    
+    video = open_video(file_path)
     
     # detect potential boundaries of scenes
     scene_manager.detect_scenes(video, show_progress=True)

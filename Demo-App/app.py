@@ -1,6 +1,6 @@
 from flask import Flask
 
-UPLOAD_FOLDER = '/media/madziegielewska/Seagate Expansion Drive/MAGISTERKA/diploma-project/Demo-App/static/uploads'
+UPLOAD_FOLDER = '/media/madziegielewska/Seagate Expansion Drive/Diploma-Project/Demo-App/static/uploads'
 
 app = Flask(__name__)
 

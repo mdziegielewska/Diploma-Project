@@ -54,6 +54,7 @@ def upload_video():
 @app.route('/results/current_res=<current_res>/filename=<filename>', methods=['GET', 'POST'])
 def get_new(current_res, filename):
 	if current_res == '1':
+		filename = f'{filename.split("_")[0]}_{filename.split("_")[1]}.mp4'
 		transnet_results = event.predict_transnetv2(filename)
 		scenedetect_results = event.predict_scenedetect(filename)
 
@@ -63,7 +64,10 @@ def get_new(current_res, filename):
 		return render_template('results.html', filename=filename, curr=2, result=current_res, res=res)
 	elif current_res == '2':
 		file, file_extension =  os.path.splitext(f'{filename}')
-		res = [[121212, 678],[787, 678], file]
+		px = segmentation.test_segmentation(filename)
+
+		filename = f'{file}_segmented.mp4'
+		res = [px]
 
 		return render_template('results.html', filename=filename, curr=1, result=current_res, res=res)
 

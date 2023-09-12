@@ -21,7 +21,7 @@ output_path = f"{directory}/Semantic-Segmentation/segmentation_test_results"
 
 model = "unet"
 backbone = "resnet50"
-model_path = f"{directory}/Semantic-Segmentation/models/{model}_softmax_1500_{backbone}.hdf5"
+model_path = f"{directory}/Demo-App/models/{model}_softmax_1500_{backbone}.hdf5"
 output_path = f"{directory}/Demo-App/static/segmentation_results"
 
 

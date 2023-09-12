@@ -6,6 +6,7 @@ import os
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+import csv
 from datetime import datetime
 import math
 from albumentations import CenterCrop, RandomRotate90, GridDistortion, HorizontalFlip, VerticalFlip
@@ -89,20 +90,13 @@ def convert_frame_to_timestamp(video_path, frame):
     vidcap = cv2.VideoCapture(base_dir)
     fps = vidcap.get(cv2.CAP_PROP_FPS)
 
-    milisec = (frame-1)/fps
+    sec = round((frame-1)/fps, 2)
 
-    dt_obj = datetime.strptime(timestamp,"%H:%M:%S.%f")
-    time = dt_obj.time()
+    if sec > 60:
+        min = sec%60
+        return f"{min}m{sec}s"
 
-    # convert timestamp to seconds
-    min = time.minute
-    sec = time.second
-    msec = time.microsecond
-
-    milisec = min * 60 + sec + msec / 1000000
-    frame_number = round(milisec * fps + 1)
-
-    return frame_number
+    return sec
 
 
 def convert_frames_to_video(video_name, fps):
@@ -119,7 +113,25 @@ def convert_frames_to_video(video_name, fps):
     concat_clip = concatenate_videoclips(clips, method="compose")
 
     file, file_extension =  os.path.splitext(f'{video_name}')
-    concat_clip.write_videofile(f'{dir}Demo-App/static/uploads/{file}_segmented.mp4', fps=fps)
+    concat_clip.write_videofile(f'{dir}Demo-App/static/uploads/{file}_to_resize.mp4', fps=fps)
+
+    resize_video(f'{dir}Demo-App/static/uploads/{file}_to_resize.mp4', f'{dir}Demo-App/static/uploads/{file}_segmented.mp4')
+
+
+def resize_video(input_video, output_video):
+    clip = VideoFileClip(input_video)
+    clip_resized = clip.resize(newsize=(928, 699))
+    clip_resized.write_videofile(output_video)
+
+
+def convert_to_csv(input_path, output_path):
+    with open(input_path, 'r') as in_file:
+        stripped = (line.strip() for line in in_file)
+        lines = (line.split(" ") for line in stripped if line)
+
+        with open(output_path, 'w') as out_file:
+            writer = csv.writer(out_file)
+            writer.writerows(lines)
 
 
 def read_files(path):
