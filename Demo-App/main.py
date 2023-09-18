@@ -36,7 +36,7 @@ def upload_video():
 			file, file_extension =  os.path.splitext(f'{filename}')
 			px = segmentation.test_segmentation(filename)
 
-			filename = f'{file}_segmented.mp4'
+			filename = f'{file}_segmented_of.mp4'
 			res = [px]
 		elif selected_option == 'event':
 			current_res = 2
@@ -66,7 +66,7 @@ def get_new(current_res, filename):
 		file, file_extension =  os.path.splitext(f'{filename}')
 		px = segmentation.test_segmentation(filename)
 
-		filename = f'{file}_segmented.mp4'
+		filename = f'{file}_segmented_of.mp4'
 		res = [px]
 
 		return render_template('results.html', filename=filename, curr=1, result=current_res, res=res)

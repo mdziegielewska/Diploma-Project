@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 import glob
 import utils
+import opticalflow as of
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 import tensorflow as tf
 from keras.models import load_model
@@ -17,7 +18,6 @@ import matplotlib.pyplot as plt
 # os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
 
 directory = "/media/madziegielewska/Seagate Expansion Drive/Diploma-Project"
-output_path = f"{directory}/Semantic-Segmentation/segmentation_test_results"
 
 model = "unet"
 backbone = "resnet50"
@@ -27,6 +27,8 @@ output_path = f"{directory}/Demo-App/static/segmentation_results"
 
 def test_segmentation(video_name, statistics=True):
     input_path = f"{directory}/videos/{video_name}"
+
+    utils.delete_files_in_directory(output_path)
 
     # load model and preprocessing
     model = load_model(model_path, compile=False)
@@ -57,6 +59,7 @@ def test_segmentation(video_name, statistics=True):
 
         gray_results.append(test_pred)
 
+        """
         needle_mask = test_pred.astype(np.uint8)
         needle_mask[needle_mask != 1] = 0
         needle_mask[needle_mask == 1] = 255
@@ -74,12 +77,17 @@ def test_segmentation(video_name, statistics=True):
         spermatozoid_mask[spermatozoid_mask == 3] = 255
         spermatozoid_mask = np.stack((spermatozoid_mask,)*3, axis=-1)
         spermatozoid_mask[np.where((spermatozoid_mask==[255,255,255]).all(axis=2))] = [0,0,255]
+        """
+
+        spermatozoid_mask = get_masks(test_pred, "spermatozoid")
+        oocyte_mask = get_masks(test_pred, "oocyte")
+        needle_mask = get_masks(test_pred, "needle")
 
         dst = cv2.addWeighted(oocyte_mask, 1, needle_mask, 1, 0)
         dst = cv2.addWeighted(dst, 1, spermatozoid_mask, 1, 0)
         combined_masks = utils.remove_background(dst)
 
-        dst = cv2.addWeighted(frame, 1, combined_masks, 0.6, 0)
+        # dst = cv2.addWeighted(frame, 1, combined_masks, 0.6, 0)
         cv2.imwrite(f"{output_path}/frame_{count}.png", dst)
 
         results.append(dst)
@@ -88,10 +96,31 @@ def test_segmentation(video_name, statistics=True):
     vidcap.release()
 
     preds = np.array(results)
+    of.analyze_frames()
 
-    utils.convert_frames_to_video(video_name, 20)
+    utils.convert_frames_to_video(video_name, 5)
 
     if statistics == True:
         stats = utils.get_average_pixels(gray_results)
 
         return stats
+
+
+def get_masks(pred, element):
+    if element == "spermatozoid":
+        mask = [0,0,255]
+        label = 3
+    elif element == "needle":
+        mask = [240, 100, 50]
+        label = 1
+    elif element == "oocyte":
+        mask = [0,255,255]
+        label = 2
+
+    element_mask = pred.astype(np.uint8)
+    element_mask[element_mask != label] = 0
+    element_mask[element_mask == label] = 255
+    element_mask = np.stack((element_mask,)*3, axis=-1)
+    element_mask[np.where((element_mask==[255,255,255]).all(axis=2))] = mask
+
+    return element_mask

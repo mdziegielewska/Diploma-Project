@@ -101,7 +101,7 @@ def convert_frame_to_timestamp(video_path, frame):
 
 def convert_frames_to_video(video_name, fps):
     dir = "/media/madziegielewska/Seagate Expansion Drive/Diploma-Project/"
-    frames_path = f"{dir}Demo-App/static/segmentation_results"
+    frames_path = f"{dir}Demo-App/static/opyflow_results"
     print("converting frames from ", frames_path)
 
     file_list = glob.glob(f'{frames_path}/*.png')  # get all the pngs in the current directory
@@ -115,7 +115,7 @@ def convert_frames_to_video(video_name, fps):
     file, file_extension =  os.path.splitext(f'{video_name}')
     concat_clip.write_videofile(f'{dir}Demo-App/static/uploads/{file}_to_resize.mp4', fps=fps)
 
-    resize_video(f'{dir}Demo-App/static/uploads/{file}_to_resize.mp4', f'{dir}Demo-App/static/uploads/{file}_segmented.mp4')
+    resize_video(f'{dir}Demo-App/static/uploads/{file}_to_resize.mp4', f'{dir}Demo-App/static/uploads/{file}_segmented_of.mp4')
 
 
 def resize_video(input_video, output_video):
@@ -305,3 +305,13 @@ def get_total_frames(video_path):
     length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     
     return length
+
+
+def delete_files_in_directory(directory_path):
+    files = os.listdir(directory_path)
+
+    for file in files:
+        file_path = os.path.join(directory_path, file)
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+
