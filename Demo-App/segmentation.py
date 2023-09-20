@@ -25,7 +25,7 @@ model_path = f"{directory}/Demo-App/models/{model}_softmax_1500_{backbone}.hdf5"
 output_path = f"{directory}/Demo-App/static/segmentation_results"
 
 
-def test_segmentation(video_name, statistics=True):
+def test_segmentation(video_name, element, statistics=True):
     input_path = f"{directory}/videos/{video_name}"
 
     utils.delete_files_in_directory(output_path)
@@ -79,16 +79,20 @@ def test_segmentation(video_name, statistics=True):
         spermatozoid_mask[np.where((spermatozoid_mask==[255,255,255]).all(axis=2))] = [0,0,255]
         """
 
-        spermatozoid_mask = get_masks(test_pred, "spermatozoid")
-        oocyte_mask = get_masks(test_pred, "oocyte")
-        needle_mask = get_masks(test_pred, "needle")
+        #spermatozoid_mask = get_masks(test_pred, "spermatozoid")
+        dst = get_masks(test_pred, element)
+        #needle_mask = get_masks(test_pred, "needle")
+        frame = np.uint8(frame)
+        dst = np.uint8(dst)
 
-        dst = cv2.addWeighted(oocyte_mask, 1, needle_mask, 1, 0)
-        dst = cv2.addWeighted(dst, 1, spermatozoid_mask, 1, 0)
-        combined_masks = utils.remove_background(dst)
+        #dst = cv2.addWeighted(oocyte_mask, 1, needle_mask, 1, 0)
+        #dst = cv2.addWeighted(dst, 1, spermatozoid_mask, 1, 0)
+        masked = cv2.bitwise_and(frame,dst)
+        combined_masks = utils.remove_background(masked)
+        
 
         # dst = cv2.addWeighted(frame, 1, combined_masks, 0.6, 0)
-        cv2.imwrite(f"{output_path}/frame_{count}.png", dst)
+        cv2.imwrite(f"{output_path}/frame_{count}.png", combined_masks)
 
         results.append(dst)
         count += 1
@@ -98,7 +102,7 @@ def test_segmentation(video_name, statistics=True):
     preds = np.array(results)
     of.analyze_frames()
 
-    utils.convert_frames_to_video(video_name, 5)
+    utils.convert_frames_to_video(video_name, 20)
 
     if statistics == True:
         stats = utils.get_average_pixels(gray_results)
@@ -121,6 +125,6 @@ def get_masks(pred, element):
     element_mask[element_mask != label] = 0
     element_mask[element_mask == label] = 255
     element_mask = np.stack((element_mask,)*3, axis=-1)
-    element_mask[np.where((element_mask==[255,255,255]).all(axis=2))] = mask
+    #element_mask[np.where((element_mask==[255,255,255]).all(axis=2))] = mask
 
     return element_mask

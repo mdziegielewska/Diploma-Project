@@ -34,7 +34,7 @@ def upload_video():
 			result_num = 2
 
 			file, file_extension =  os.path.splitext(f'{filename}')
-			px = segmentation.test_segmentation(filename)
+			px = segmentation.test_segmentation(filename, "spermatozoid")
 
 			filename = f'{file}_segmented_of.mp4'
 			res = [px]
@@ -64,7 +64,7 @@ def get_new(current_res, filename):
 		return render_template('results.html', filename=filename, curr=2, result=current_res, res=res)
 	elif current_res == '2':
 		file, file_extension =  os.path.splitext(f'{filename}')
-		px = segmentation.test_segmentation(filename)
+		px = segmentation.test_segmentation(filename, "spermatozoid")
 
 		filename = f'{file}_segmented_of.mp4'
 		res = [px]

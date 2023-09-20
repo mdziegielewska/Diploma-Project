@@ -14,6 +14,6 @@ def analyze_frames():
     analyzer.extractGoodFeaturesPositionsDisplacementsAndInterpolate()
 
     analyzer.writeVelocityField(fileFormat='csv', outFolder=f"{dir}Demo-App/static/opyflow_results")
-    analyzer.set_vecTime(Ntot=num//2,shift=2,step=1)
+    analyzer.set_vecTime(Ntot=num-1,shift=1,step=1)
 
     analyzer.extractGoodFeaturesAndDisplacements(display='quiver', displayColor=True, saveImgPath=f"{dir}/Demo-App/static/opyflow_results", width=0.002)
