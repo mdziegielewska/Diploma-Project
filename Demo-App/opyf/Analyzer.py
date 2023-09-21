@@ -662,7 +662,10 @@ class Analyzer():
             print(
                 'No displacements measured (consider changing parameters set if displacements expected between these two frames)')
         else:
-            v = round(0.06/(math.sqrt(np.max(np.absolute(self.V))/3.14)),5)
+            if np.max(np.absolute(self.V)) == 0:
+                v = 0
+            else:
+                v = round(0.06/(math.sqrt(np.max(np.absolute(self.V))/3.14)),5)
             print('Displacement max = ' + str(v) +  ' ' + 'cm/s')
 
     def reset(self, first=False):

@@ -27,6 +27,7 @@ def upload_video():
 		return redirect(request.url)
 	file = request.files['file']
 	selected_option = request.form.get('dropdown')
+	model_backbone_option = request.form.get('secondDropdown')
 
 	if file.filename == '':
 		flash('No image selected for uploading')
@@ -38,9 +39,11 @@ def upload_video():
 		if selected_option == 'move':
 			current_res = 1
 			result_num = 2
+			words = model_backbone_option.split('-') 
+			data = [word.lower() for word in words]
 
 			file, file_extension =  os.path.splitext(f'{filename}')
-			px = segmentation.test_segmentation(filename, "unet", "resnet50")
+			px = segmentation.test_segmentation(filename, data[0], data[1])
 
 			units = round(0.06/(math.sqrt(px[1]/3.14)),5)
 			cmpers = round(units*20,5)
