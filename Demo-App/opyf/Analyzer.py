@@ -313,7 +313,8 @@ class Analyzer():
                         '--> detect Good Features to Track on image [' + self.listD[i] + ']')
                     file_prev = self.listD[i]
                 else:
-                    print('--> diplacements measurement between images [' +file_prev + '] and [' +self.listD[i] +']')
+                    print('--> diplacements measurement between images [' +file_prev +
+                        '] and [' +self.listD[i] +']')
 
         if self.processingMode == 'video' and self.mute == False:
             for pr, i in zip(self.prev, self.vec):
@@ -696,9 +697,8 @@ class Analyzer():
                 self.Xdata.append(self.X)
                 self.Vdata.append(self.V)
 
-                display=display
-
-                self.showXV(self.X, self.V, vis=self.vis,display=display, **args)
+                self.showXV(self.X, self.V, vis=self.vis,
+                            display=display, **args)
                 if saveImgPath is not None and self.display:
                     if numberingOutput:
                         self.opyfDisp.fig.savefig(
@@ -709,7 +709,7 @@ class Analyzer():
                         '_to_' + format(i + self.paramVecTime['step'], '04.0f') + '.' + imgFormat))
 
                 if display is not False:
-                    #self.opyfDisp.fig.show()
+                    # self.opyfDisp.fig.show()
                     time.sleep(0.1)
 
     def extractGoodFeaturesDisplacementsAndAccumulate(
@@ -790,7 +790,7 @@ class Analyzer():
                 self.Field[np.where(self.Field == 0)] = np.nan
                 self.Field = self.Field * self.gridMask
                 if display == 'field' and self.mute == False and self.display == True:
-                    #self.opyfDisp.plotField(self.Field, vis=self.vis, **args)
+                    self.opyfDisp.plotField(self.Field, vis=self.vis, **args)
                     time.sleep(0.1)
                 elif display == 'quiver_on_field' and self.mute == False and self.display == True:
                     self.opyfDisp.plotQuiverField(

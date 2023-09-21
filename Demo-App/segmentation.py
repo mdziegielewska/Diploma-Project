@@ -19,16 +19,16 @@ import matplotlib.pyplot as plt
 
 directory = "/media/madziegielewska/Seagate Expansion Drive/Diploma-Project"
 
-model = "unet"
-backbone = "resnet50"
-model_path = f"{directory}/Demo-App/models/{model}_softmax_1500_{backbone}.hdf5"
-output_path = f"{directory}/Demo-App/static/segmentation_results"
 
-
-def test_segmentation(video_name, element, statistics=True):
+def test_segmentation(video_name, model, backbone, statistics=True):
     input_path = f"{directory}/videos/{video_name}"
+    output_path = f"{directory}/Demo-App/static/segmentation_results/"
 
-    utils.delete_files_in_directory(output_path)
+    model_path = f"{directory}/Demo-App/models/{model}_softmax_1500_{backbone}.hdf5"
+
+    utils.delete_files_in_directory(f"{output_path}/needle")
+    utils.delete_files_in_directory(f"{output_path}/oocyte")
+    utils.delete_files_in_directory(f"{output_path}/spermatozoid")
 
     # load model and preprocessing
     model = load_model(model_path, compile=False)
@@ -41,7 +41,9 @@ def test_segmentation(video_name, element, statistics=True):
     count = 0
     frames = []
     gray_results = []
-    results = []
+    results_sp = []
+    results_ne = []
+    results_oo = []
 
     while True:
         ret,image = vidcap.read()
@@ -79,30 +81,67 @@ def test_segmentation(video_name, element, statistics=True):
         spermatozoid_mask[np.where((spermatozoid_mask==[255,255,255]).all(axis=2))] = [0,0,255]
         """
 
-        #spermatozoid_mask = get_masks(test_pred, "spermatozoid")
-        dst = get_masks(test_pred, element)
-        #needle_mask = get_masks(test_pred, "needle")
+        # SPERMATOZOID
         frame = np.uint8(frame)
-        dst = np.uint8(dst)
+        spermatozoid_mask = get_masks(test_pred, "spermatozoid")
+        sp = np.uint8(spermatozoid_mask)
 
-        #dst = cv2.addWeighted(oocyte_mask, 1, needle_mask, 1, 0)
-        #dst = cv2.addWeighted(dst, 1, spermatozoid_mask, 1, 0)
-        masked = cv2.bitwise_and(frame,dst)
-        combined_masks = utils.remove_background(masked)
+        masked = cv2.bitwise_and(frame, sp)
+        combined_masks_sp = utils.remove_background(masked)
+
+        all_zeros = np.all(combined_masks_sp==0)
+
+        if all_zeros:
+            pass
+        else:
+            cv2.imwrite(f"{output_path}/spermatozoid/frame_{count}.png", combined_masks_sp)
+
+        results_sp.append(combined_masks_sp)
+        preds_sp = np.array(results_sp)
+
+        # OOCYTE
+
+        oocyte_mask = get_masks(test_pred, "oocyte")
+        oo = np.uint8(oocyte_mask)
+
+        masked = cv2.bitwise_and(frame, oo)
+        combined_masks_oo = utils.remove_background(masked)
+
+        all_zeros = np.all(combined_masks_oo==0)
+
+        if all_zeros:
+            pass
+        else:
+            cv2.imwrite(f"{output_path}/oocyte/frame_{count}.png", combined_masks_oo)
+
+        results_oo.append(combined_masks_oo)
+        preds_oo = np.array(results_oo)
+
+        # NEEDLE
+        needle_mask = get_masks(test_pred, "needle")
+        ne = np.uint8(needle_mask)
         
+        masked = cv2.bitwise_and(frame, ne)
+        combined_masks_ne = utils.remove_background(masked)
 
-        # dst = cv2.addWeighted(frame, 1, combined_masks, 0.6, 0)
-        cv2.imwrite(f"{output_path}/frame_{count}.png", combined_masks)
+        all_zeros = np.all(combined_masks_ne==0)
 
-        results.append(dst)
+        if all_zeros:
+            pass
+        else:
+            # dst = cv2.addWeighted(frame, 1, combined_masks, 0.6, 0)
+            cv2.imwrite(f"{output_path}/needle/frame_{count}.png", combined_masks_ne)
+
+        results_ne.append(combined_masks_ne)
+        preds_ne = np.array(results_ne)
+        
         count += 1
 
     vidcap.release()
 
-    preds = np.array(results)
-    of.analyze_frames()
-
-    utils.convert_frames_to_video(video_name, 20)
+    of.analyze_frames("oocyte")
+    of.analyze_frames("spermatozoid")
+    of.analyze_frames("needle")
 
     if statistics == True:
         stats = utils.get_average_pixels(gray_results)

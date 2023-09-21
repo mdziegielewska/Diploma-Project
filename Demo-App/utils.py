@@ -99,9 +99,9 @@ def convert_frame_to_timestamp(video_path, frame):
     return sec
 
 
-def convert_frames_to_video(video_name, fps):
+def convert_frames_to_video(video_name, element, fps):
     dir = "/media/madziegielewska/Seagate Expansion Drive/Diploma-Project/"
-    frames_path = f"{dir}Demo-App/static/opyflow_results"
+    frames_path = f"{dir}Demo-App/static/opyflow_results/{element}"
     print("converting frames from ", frames_path)
 
     file_list = glob.glob(f'{frames_path}/*.png')  # get all the pngs in the current directory

@@ -143,7 +143,13 @@
 			Plemnik: {{res[0][3]}}<br>
 			<br>
 
-			Kolejno ........
+			Kolejno, wyznaczono przepływ optyczny metodą Lucas-Kanade oraz szybkości chwilowe w px/deltaT, które można zaobserwować na załączonym filmie. <br>
+			Bazując na średnim wystąpieniu komórki jajowej na ramce, a także informacji, iż średni promień komórki jajowej wynosi 0.06cm, przedstawiono poniżej przelicznik jednostek z px/deltaT na cm/s. <br>
+			
+			<br>
+			<b>1 px = {{res[1]}} cm</b><br>
+			<b>1 px/deltaT = {{res[2]}} cm/s</b>
+
 		{% endif %}
 		</p>
     </div>
@@ -161,10 +167,30 @@
 			});
 		</script>
 
+	{% if curr == 2 %}
 		<video autoplay="autoplay" controls="controls" preload="preload" width=850 height=750 style="margin-top: -10px;">
 			<br>
 			<source src="{{ url_for('display_video', filename=filename) }}" type="video/mp4" ></source>
 		</video>
+	{% endif %}
+	{% if curr == 1 %}
+		<video autoplay="autoplay" controls="controls" preload="preload" width=850 height=750 style="margin-top: -10px;">
+			<br>
+			<source src="{{ url_for('display_video', filename=filename[0]) }}" type="video/mp4" ></source>
+		</video>
+		<video autoplay="autoplay" controls="controls" preload="preload" width=850 height=750 style="margin-top: -10px;">
+			<br>
+			<source src="{{ url_for('display_video', filename=filename[1]) }}" type="video/mp4" ></source>
+		</video>
+		<video autoplay="autoplay" controls="controls" preload="preload" width=850 height=750 style="margin-top: -10px;">
+			<br>
+			<source src="{{ url_for('display_video', filename=filename[2]) }}" type="video/mp4" ></source>
+		</video>
+		<video autoplay="autoplay" controls="controls" preload="preload" width=850 height=750 style="margin-top: -10px;">
+			<br>
+			<source src="{{ url_for('display_video', filename=filename[3]) }}" type="video/mp4" ></source>
+		</video>
+	{% endif %}
 	</div>
 {% endif %}
 </div>

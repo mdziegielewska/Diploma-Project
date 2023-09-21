@@ -378,7 +378,7 @@ class opyfDisplayer:
              gridVx=None, gridVy=None,
              Xdata=None, Vdata=None,
              vis=None, Ptype='norm', Hfig=8,
-             namefig='Segmentacja + OpyFlow', scale=True, cmap=None,
+             namefig='Opyf', scale=None, cmap=None,
              alpha=0.6, width=0.002, nvec=3000, res=32,
              c='k', s=10, ROIvis=None, **args):
 
