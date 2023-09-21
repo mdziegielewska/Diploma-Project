@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt
 import time
 import opyf
 import matplotlib as mpl
+import math
 import re
 #%%
 
@@ -638,7 +639,8 @@ class Analyzer():
             print(
                 'No displacements measured (consider changing parameters set if displacements expected between these two frames)')
         else:
-            print('Displacement max = ' + str(np.max(np.absolute(self.V))) +  ' ' + self.unit[0] + '/' + self.unit[1])
+            v = round(0.06/(math.sqrt(np.max(np.absolute(self.V))/3.14)),5)
+            print('Displacement max = ' + str(v) +  ' ' + 'cm/s')
 
     def scaleAndLogFlow(self, i):
         if self.scaled:
@@ -660,8 +662,8 @@ class Analyzer():
             print(
                 'No displacements measured (consider changing parameters set if displacements expected between these two frames)')
         else:
-            print('Displacement max = ' + str(np.max(np.absolute(self.V))) +
-                  ' ' + self.unit[0] + '/' + self.unit[1])
+            v = round(0.06/(math.sqrt(np.max(np.absolute(self.V))/3.14)),5)
+            print('Displacement max = ' + str(v) +  ' ' + 'cm/s')
 
     def reset(self, first=False):
         self.Xdata = []

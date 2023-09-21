@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ppl">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Aplikacja demo</title>
+</head>
+
+<style>
+	body {
+		background-color: #fffff9;
+		color: black;
+		font-family: system-ui;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		font-size: 28px;
+		min-height: 100vh;
+	}
+	header {
+		background-color: #fffff9;
+		font-family: system-ui;
+		padding: 20px;
+		text-align: left;
+		margin: 50px;
+		font-size: 20px;
+		padding: 0;
+	}
+	main {
+		flex: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	section {
+		margin: 20px;
+		padding: 20px;
+		background-color: #fffff9;
+		border-radius: 5px;
+		text-align: center;
+	}
+	.container {
+    display: flex; 
+    text-align: left;
+    }
+    .box {
+        width: 50%; 
+        padding: 20px;
+        margin-right: 20px;
+    }
+	button {
+		background-color: #afde95;
+		font-family: system-ui;
+		color: black;
+		border: none;
+		padding: 10px 20px;
+		border-radius: 5px;
+		cursor: pointer;
+		font-size: 18px;
+	}
+	.right-button {
+		background-color: #afde95;
+		font-family: system-ui;
+		color: black;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		font-size: 18px;
+		float: right; 
+		margin-left: 10px; 
+		margin-top: 10px;
+	}
+	footer {
+		background-color: #fffff9;
+		padding: 10px;
+		font-size: 23px;
+		text-align: right;
+		margin-right: 50px;
+		padding: 0;
+	}
+</style>
+
+<body>
+<section>
+<p style="font-size: 18px;">
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		{% for message in messages %}
+		{{ message }}
+		{% endfor %}
+	  {% endif %}
+	{% endwith %}
+</p>
+
+
+<div class="container">
+    <div class="box">
+        <h3>Rozwiązanie 1</h3>
+        <p style="font-size: 18px;">
+			Celem był pomiar ruchu na nagraniu procedury docytoplazmatycznej injekcji plemnika. 
+			Dokonano segmentacji przy pomocy architektury UNet z rdzeniem ResNet50, na bazie której wyznaczono obszary komórki jajowej, igły i plemnika. <br>
+			<br>
+			<b>Średnia wystąpień danej klasy na klatce w pikselach</b><br>
+			Tło: 105422<br>
+			Komórka jajowa: 37916<br>
+			Igła: 4067<br>
+			Plemnik: 51<br>
+			<br>
+
+			Kolejno, wyznaczono przepływ optyczny metodą Lucas-Kanade oraz szybkości chwilowe w px/deltaT, które można zaobserwować na załączonym filmie. <br>
+			Bazując na średnim wystąpieniu komórki jajowej na ramce, a także informacji, iż średni promień komórki jajowej wynosi 0.06cm, przedstawiono poniżej przelicznik jednostek z px/deltaT na cm/s. <br>
+			
+			<br>
+			<b>1 px = 0.00055 cm</b><br>
+			<b>1 px/deltaT = 0.01092 cm/s</b>
+		</p>
+    </div>
+	<div style="margin-right: 10px; padding-right: 20px; width: 50%;" class="box">
+		<button id="return" value="return" class="right-button">Powrót</button>
+		<button id="result" value="result" class="right-button">Rozwiązanie 2</button>
+		
+		<script>
+			document.getElementById('return').addEventListener('click', function() {
+				window.location.href = "{{ url_for('upload_form') }}";
+			});
+
+			document.getElementById('result').addEventListener('click', function() {
+				window.location.href = "{{ url_for('get_new', current_res=1, filename='58_Trim2.mp4') }}";
+			});
+		</script>
+
+        <video autoplay="autoplay" controls="controls" preload="preload" width=850 height=750 style="margin-top: -10px;">
+            <br>
+            <source src="{{ url_for('display_video', filename='58_Trim2.mp4') }}" type="video/mp4" ></source>
+        </video>
+        <video autoplay="autoplay" controls="controls" preload="preload" width=850 height=750 style="margin-top: -10px;">
+            <br>
+            <source src="{{ url_for('display_video', filename='oocyte_segmented_of.mp4') }}" type="video/mp4" ></source>
+        </video>
+        <video autoplay="autoplay" controls="controls" preload="preload" width=850 height=750 style="margin-top: -10px;">
+            <br>
+            <source src="{{ url_for('display_video', filename='needle_segmented_of.mp4') }}" type="video/mp4" ></source>
+        </video>
+        <video autoplay="autoplay" controls="controls" preload="preload" width=850 height=750 style="margin-top: -10px;">
+            <br>
+            <source src="{{ url_for('display_video', filename='spermatozoid_segmented_of.mp4') }}" type="video/mp4" ></source>
+        </video>
+	</div>
+
+</div>
+</section>
+<footer>
+	<p><b>Autor:</b> Marta Dzięgielewska</p>
+	<br>
+	<br>
+</footer>
+</body>
+</html>

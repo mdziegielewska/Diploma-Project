@@ -15,6 +15,11 @@ def upload_form():
 	return render_template('upload.html')
 
 
+@app.route('/demo')
+def show_demo():
+	return render_template('demo.html')
+
+
 @app.route('/results', methods=['GET','POST'])
 def upload_video():
 	if 'file' not in request.files:
@@ -59,7 +64,6 @@ def upload_video():
 @app.route('/results/current_res=<current_res>/filename=<filename>', methods=['GET', 'POST'])
 def get_new(current_res, filename):
 	if current_res == '1':
-		filename = f'{filename.split("_")[0]}_{filename.split("_")[1]}.mp4'
 		transnet_results = event.predict_transnetv2(filename)
 		scenedetect_results = event.predict_scenedetect(filename)
 
