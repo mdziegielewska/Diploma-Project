@@ -640,7 +640,7 @@ class Analyzer():
                 'No displacements measured (consider changing parameters set if displacements expected between these two frames)')
         else:
             v = round(0.06/(math.sqrt(np.max(np.absolute(self.V))/3.14)),5)
-            print('Displacement max = ' + str(v) +  ' ' + 'cm/s')
+            print('Displacement max = ' + str(v) +  ' ' + 'mm/s')
 
     def scaleAndLogFlow(self, i):
         if self.scaled:
@@ -666,7 +666,7 @@ class Analyzer():
                 v = 0
             else:
                 v = round(0.06/(math.sqrt(np.max(np.absolute(self.V))/3.14)),5)
-            print('Displacement max = ' + str(v) +  ' ' + 'cm/s')
+            print('Displacement max = ' + str(v) +  ' ' + 'mm/s')
 
     def reset(self, first=False):
         self.Xdata = []

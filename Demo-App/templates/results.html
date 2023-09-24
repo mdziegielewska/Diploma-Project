@@ -134,7 +134,7 @@
 
 		{% if curr == 1 %}
 			Celem był pomiar ruchu na nagraniu procedury docytoplazmatycznej injekcji plemnika. 
-			Dokonano segmentacji przy pomocy architektury {{data[0]}} z rdzeniem {{data[1]}}, na bazie której wyznaczono obszary komórki jajowej, igły i plemnika. <br>
+			Dokonano segmentacji przy pomocy architektury {{res[3][0]}} z rdzeniem {{res[3][1]}}, na bazie której wyznaczono obszary komórki jajowej, igły i plemnika. <br>
 			<br>
 			<b>Średnia wystąpień danej klasy na klatce w pikselach</b><br>
 			Tło: {{res[0][0]}}<br>
@@ -144,11 +144,11 @@
 			<br>
 
 			Kolejno, wyznaczono przepływ optyczny metodą Lucas-Kanade oraz szybkości chwilowe w px/deltaT, które można zaobserwować na załączonym filmie. <br>
-			Bazując na średnim wystąpieniu komórki jajowej na ramce, a także informacji, iż średni promień komórki jajowej wynosi 0.06cm, przedstawiono poniżej przelicznik jednostek z px/deltaT na cm/s. <br>
+			Bazując na średnim wystąpieniu komórki jajowej na ramce, a także informacji, iż średni promień komórki jajowej wynosi 0.06mm, przedstawiono poniżej przelicznik jednostek z px/deltaT na mm/s. <br>
 			
 			<br>
-			<b>1 px = {{res[1]}} cm</b><br>
-			<b>1 px/deltaT = {{res[2]}} cm/s</b>
+			<b>1 px = {{res[1]}} mm</b><br>
+			<b>1 px/deltaT = {{res[2]}} mm/s</b>
 
 		{% endif %}
 		</p>
@@ -176,19 +176,19 @@
 	{% if curr == 1 %}
 		<video autoplay="autoplay" controls="controls" preload="preload" width=850 height=750 style="margin-top: -10px;">
 			<br>
-			<source src="{{ url_for('display_video', filename=filename[0]) }}" type="video/mp4" ></source>
+			<source src="{{ url_for('display_video', filename=filename) }}" type="video/mp4" ></source>
 		</video>
 		<video autoplay="autoplay" controls="controls" preload="preload" width=850 height=750 style="margin-top: -10px;">
 			<br>
-			<source src="{{ url_for('display_video', filename=filename[1]) }}" type="video/mp4" ></source>
+			<source src="{{ url_for('display_video', filename='oocyte_segmented_of.mp4') }}" type="video/mp4" ></source>
 		</video>
 		<video autoplay="autoplay" controls="controls" preload="preload" width=850 height=750 style="margin-top: -10px;">
 			<br>
-			<source src="{{ url_for('display_video', filename=filename[2]) }}" type="video/mp4" ></source>
+			<source src="{{ url_for('display_video', filename='spermatozoid_segmented_of.mp4') }}" type="video/mp4" ></source>
 		</video>
 		<video autoplay="autoplay" controls="controls" preload="preload" width=850 height=750 style="margin-top: -10px;">
 			<br>
-			<source src="{{ url_for('display_video', filename=filename[3]) }}" type="video/mp4" ></source>
+			<source src="{{ url_for('display_video', filename='needle_segmented_of.mp4') }}" type="video/mp4" ></source>
 		</video>
 	{% endif %}
 	</div>

@@ -52,6 +52,7 @@ def show_graph(filename, output_path_preds):
     ax.set_xlabel('Klatka')
     ax.set_ylabel('Predykowana wartość')
 
+    plt.tight_layout()
     plt.savefig(f'{dir}Demo-App/static/graphs/{filename}_transnet.jpg')
 
 
@@ -85,6 +86,7 @@ def predict_scenedetect(video_path):
     ax.set_ylabel('Predykowana wartość')
     ax.get_legend().remove()
 
+    plt.tight_layout()
     plt.savefig(f'{dir}Demo-App/static/graphs/{filename}.jpg')
 
     max_value = graph['content_val'].idxmax()
