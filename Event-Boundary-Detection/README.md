@@ -1,0 +1,1 @@
+The results of the conducted research (F1-score): TransnetV2 - 87%. SceneDetect - 62%.
