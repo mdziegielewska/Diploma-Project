@@ -1,3 +1,9 @@
+"""
+Core of the DEMO-app
+Marta Dzięgielewska
+"""
+
+
 from flask import Flask
 
 UPLOAD_FOLDER = '/media/madziegielewska/Seagate Expansion Drive/Diploma-Project/Demo-App/static/uploads'

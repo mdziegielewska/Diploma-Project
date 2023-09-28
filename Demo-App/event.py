@@ -1,3 +1,5 @@
+# Functions to predict event boundaries
+
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 from scenedetect import open_video, SceneManager, StatsManager

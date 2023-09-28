@@ -1,3 +1,5 @@
+# Helper functions
+
 from vidstab import VidStab
 from moviepy.editor import *
 from natsort import natsorted

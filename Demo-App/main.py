@@ -1,12 +1,12 @@
-import os
+# Endpoints to the main app
 
+import os
 from werkzeug import run_simple
 from app import app
 import urllib.request
 from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 from urllib.parse import quote, unquote
-
 import event
 import math
 import segmentation
